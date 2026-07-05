@@ -1,12 +1,19 @@
-import PagePlaceholder from "@/components/PagePlaceholder";
+import TicketForm from "@/components/TicketForm";
+import styles from "./page.module.css";
 
 export const metadata = { title: "Submit a Ticket" };
 
 export default function SubmitPage() {
   return (
-    <PagePlaceholder
-      title="Submit a Ticket"
-      note="The ticket form arrives in slice 05."
-    />
+    <main className={styles.main}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Submit a Ticket</h1>
+        <p className={styles.sub}>
+          Report an issue or request AV support. Tickets are reviewed before
+          they appear on the tracker.
+        </p>
+      </header>
+      <TicketForm />
+    </main>
   );
 }

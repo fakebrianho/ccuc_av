@@ -17,6 +17,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "mongodb-memory-server": "^10.4.3",
     "playwright": "^1.61.1"
   }
 }
