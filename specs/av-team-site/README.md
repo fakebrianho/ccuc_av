@@ -17,10 +17,12 @@ route is implemented). Ticket data layer live: `src/lib/db.js`,
 **User decision (2026-07-05):** hero copy is minimal — "CCUC AV / The audio &
 visual department of CCUC." No taglines or marketing hooks anywhere; keep all
 copy minimal.
-**Next pickup:** Slices `02-team-page` and `03-responsibilities-page` (parallel
-OK), then 05/06/07.
-**Note:** Live Atlas round-trip not yet verified (no `MONGODB_URI` locally) —
-verify when credentials exist, at latest during slice 05.
+**Next pickup:** Slice `08-admin-dashboard` (05/06/07 verified against an
+in-memory Mongo: form round-trip, tracker board, full login/logout/guard flow).
+**Note:** Live Atlas round-trip still unverified (no real `MONGODB_URI`) —
+verify during slice 09 deploy. Local verification harness:
+`specs/av-team-site/assets/memdb.mjs` (seeded in-memory Mongo on port 27099)
+plus `login-check.mjs` / `shoot-tickets.mjs`.
 **Blockers/warnings:**
 - This is **Next.js 16.2.10** — it differs from older Next.js. Read the relevant
   guide in `node_modules/next/dist/docs/` before writing framework code. Notably:
@@ -35,12 +37,12 @@ verify when credentials exist, at latest during slice 05.
 **Global TODO:**
 - [x] `00-foundation` — deps, design tokens, layout, content config
 - [x] `01-animated-shell` — Lenis + motion.dev transitions + GSAP hero (first playable)
-- [ ] `02-team-page` — roster + contact cards
-- [ ] `03-responsibilities-page` — do / don't scope
+- [x] `02-team-page` — roster + contact cards
+- [x] `03-responsibilities-page` — do / don't scope
 - [x] `04-ticket-data-layer` — Atlas connection + ticket model + API
-- [ ] `05-ticket-form` — public submission → triage queue
-- [ ] `06-ticket-tracker` — public read-only board
-- [ ] `07-auth` — env password, cookie session, proxy guard
+- [x] `05-ticket-form` — public submission → triage queue
+- [x] `06-ticket-tracker` — public read-only board
+- [x] `07-auth` — env password, cookie session, proxy guard
 - [ ] `08-admin-dashboard` — triage, schedule, edit, delete
 - [ ] `09-polish-integration` — seamless transitions everywhere, a11y, deploy
 
