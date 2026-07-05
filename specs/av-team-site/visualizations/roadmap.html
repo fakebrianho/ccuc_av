@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AV Team Site — Roadmap</title>
+<style>
+  :root { --bg:#0b0b0c; --card:#161618; --line:#2a2a2e; --fg:#f5f5f7; --mut:#9a9aa2; --acc:#2997ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.5 -apple-system, "SF Pro Text", Inter, system-ui, sans-serif; padding:48px 24px; }
+  h1 { font-size:34px; letter-spacing:-.02em; margin:0 0 4px; }
+  p.sub { color:var(--mut); margin:0 0 40px; }
+  .track { display:grid; gap:16px; max-width:820px; margin:0 auto; }
+  .slice { background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 20px; display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; }
+  .num { font-variant-numeric:tabular-nums; font-weight:600; color:var(--acc);
+    background:rgba(41,151,255,.12); border-radius:10px; padding:6px 10px; font-size:14px; }
+  .slice h3 { margin:0 0 4px; font-size:17px; letter-spacing:-.01em; }
+  .slice p { margin:0; color:var(--mut); font-size:14px; }
+  .tag { display:inline-block; margin-top:8px; margin-right:6px; font-size:12px; color:var(--fg);
+    border:1px solid var(--line); border-radius:999px; padding:2px 9px; }
+  .play { color:#30d158; border-color:rgba(48,209,88,.4); }
+</style>
+</head>
+<body>
+  <div class="track">
+    <div>
+      <h1>AV Team Site</h1>
+      <p class="sub">Apple-style CCUC AV site · Next 16 · GSAP + Lenis + motion.dev · MongoDB Atlas on Vercel</p>
+    </div>
+    <div class="slice"><span class="num">00</span><div><h3>Foundation</h3><p>Deps, design tokens, base layout, hardcoded team/responsibilities config, env template.</p></div></div>
+    <div class="slice"><span class="num">01</span><div><h3>Animated Shell</h3><p>Lenis smooth scroll + motion.dev page transitions + GSAP hero + nav/footer.</p><span class="tag play">first playable</span></div></div>
+    <div class="slice"><span class="num">02</span><div><h3>Team Page</h3><p>Roster + contact cards (mailto/tel), staggered reveal.</p></div></div>
+    <div class="slice"><span class="num">03</span><div><h3>Responsibilities</h3><p>What we do / don't do, two-column scope.</p></div></div>
+    <div class="slice"><span class="num">04</span><div><h3>Ticket Data Layer</h3><p>Atlas singleton, single ticket schema, create/list API routes.</p></div></div>
+    <div class="slice"><span class="num">05</span><div><h3>Ticket Form</h3><p>Public /submit → lands in the <code>new</code> triage queue.</p></div></div>
+    <div class="slice"><span class="num">06</span><div><h3>Ticket Tracker</h3><p>Read-only board of triaged tickets by status/priority/schedule.</p></div></div>
+    <div class="slice"><span class="num">07</span><div><h3>Auth</h3><p>Env password → signed httpOnly cookie → proxy.js guards /admin.</p></div></div>
+    <div class="slice"><span class="num">08</span><div><h3>Admin Dashboard</h3><p>Triage, promote, edit status/priority/assignee/schedule, delete. Closes the open-GET seam.</p></div></div>
+    <div class="slice"><span class="num">09</span><div><h3>Polish & Integration</h3><p>Seamless transitions everywhere, view-transition morphs, a11y, Vercel + Atlas deploy.</p></div></div>
+  </div>
+</body>
+</html>
