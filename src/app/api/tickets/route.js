@@ -1,5 +1,6 @@
 import { validateNewTicket, STATUSES } from "@/lib/tickets/schema";
 import { createTicket, listTickets } from "@/lib/tickets/queries";
+import { isAdminRequest } from "@/lib/admin-guard";
 
 export async function POST(request) {
   let body;
@@ -40,8 +41,10 @@ export async function GET(request) {
         statuses: STATUSES.filter((s) => s !== "new"),
       });
     } else {
-      // TODO(slice 08): unscoped GET returns everything (including "new");
-      // it gets auth-guarded behind the admin session in slice 08.
+      // Full listing (including "new") is admin-only.
+      if (!(await isAdminRequest())) {
+        return Response.json({ error: "Unauthorized." }, { status: 401 });
+      }
       tickets = await listTickets();
     }
     return Response.json({ tickets });

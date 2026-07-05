@@ -17,8 +17,10 @@ route is implemented). Ticket data layer live: `src/lib/db.js`,
 **User decision (2026-07-05):** hero copy is minimal — "CCUC AV / The audio &
 visual department of CCUC." No taglines or marketing hooks anywhere; keep all
 copy minimal.
-**Next pickup:** Slice `08-admin-dashboard` (05/06/07 verified against an
-in-memory Mongo: form round-trip, tracker board, full login/logout/guard flow).
+**Next pickup:** Slice `09-polish-integration` (05-08 verified against an
+in-memory Mongo: form round-trip, tracker board, full login/logout/guard flow,
+triage approve→tracker, PATCH edits, guarded 401s on unauth GET/PATCH/DELETE).
+Slice 08 closed the slice-04 seam: unscoped `GET /api/tickets` is now admin-only.
 **Note:** Live Atlas round-trip still unverified (no real `MONGODB_URI`) —
 verify during slice 09 deploy. Local verification harness:
 `specs/av-team-site/assets/memdb.mjs` (seeded in-memory Mongo on port 27099)
@@ -43,7 +45,7 @@ plus `login-check.mjs` / `shoot-tickets.mjs`.
 - [x] `05-ticket-form` — public submission → triage queue
 - [x] `06-ticket-tracker` — public read-only board
 - [x] `07-auth` — env password, cookie session, proxy guard
-- [ ] `08-admin-dashboard` — triage, schedule, edit, delete
+- [x] `08-admin-dashboard` — triage, schedule, edit, delete
 - [ ] `09-polish-integration` — seamless transitions everywhere, a11y, deploy
 
 > Next agent: update this section (status, pickup point, checklist) before ending

@@ -1,0 +1,137 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.count {
+  font-size: var(--text-sm);
+  color: var(--fg);
+  font-weight: 500;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+}
+
+.notice,
+.empty {
+  color: var(--fg-muted);
+}
+
+.queueCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-6);
+  max-width: 720px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+}
+
+.queueBody h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+}
+
+.desc {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  margin-bottom: var(--space-2);
+  white-space: pre-wrap;
+}
+
+.meta {
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+}
+
+.queueActions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.approve {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.approve:hover {
+  background: var(--accent-hover);
+}
+
+.delete {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid rgba(215, 0, 21, 0.4);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.delete:hover {
+  border-color: var(--red);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--fg-muted);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.titleCell {
+  font-weight: 500;
+  min-width: 200px;
+}
+
+.table select,
+.table input {
+  font: inherit;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--fg);
+  width: 140px;
+}
