@@ -6,11 +6,21 @@ tracker — plus a password-protected admin area to triage and schedule tickets.
 
 ## Next Agent Prompt
 
-**Status:** Slice 00 complete, 2026-07-05. Deps installed (gsap, lenis, motion,
-mongodb), design tokens in `globals.css`, content configs in `src/data/`,
-placeholder headshots in `public/team/`, `.env.example` added, build green.
-**Next pickup:** Slice `01-animated-shell`. Slices 02/03 depend on 01; slice 04
-is independent and can run in parallel with 01.
+**Status:** Slices 00, 01, 04 complete, 2026-07-05. Shell live: single Lenis
+provider (`src/components/motion/SmoothScroll.jsx`), page transitions via
+`src/app/template.js` (motion.dev, `MotionConfig reducedMotion="user"`), GSAP
+hero, nav/footer, placeholder routes for team/responsibilities/submit/tracker
+(scaffold: `src/components/PagePlaceholder.jsx` — delete when last placeholder
+route is implemented). Ticket data layer live: `src/lib/db.js`,
+`src/lib/tickets/{schema,queries}.js`, `POST/GET /api/tickets`. Review shots in
+`specs/av-team-site/assets/`.
+**User decision (2026-07-05):** hero copy is minimal — "CCUC AV / The audio &
+visual department of CCUC." No taglines or marketing hooks anywhere; keep all
+copy minimal.
+**Next pickup:** Slices `02-team-page` and `03-responsibilities-page` (parallel
+OK), then 05/06/07.
+**Note:** Live Atlas round-trip not yet verified (no `MONGODB_URI` locally) —
+verify when credentials exist, at latest during slice 05.
 **Blockers/warnings:**
 - This is **Next.js 16.2.10** — it differs from older Next.js. Read the relevant
   guide in `node_modules/next/dist/docs/` before writing framework code. Notably:
@@ -24,10 +34,10 @@ is independent and can run in parallel with 01.
 
 **Global TODO:**
 - [x] `00-foundation` — deps, design tokens, layout, content config
-- [ ] `01-animated-shell` — Lenis + motion.dev transitions + GSAP hero (first playable)
+- [x] `01-animated-shell` — Lenis + motion.dev transitions + GSAP hero (first playable)
 - [ ] `02-team-page` — roster + contact cards
 - [ ] `03-responsibilities-page` — do / don't scope
-- [ ] `04-ticket-data-layer` — Atlas connection + ticket model + API
+- [x] `04-ticket-data-layer` — Atlas connection + ticket model + API
 - [ ] `05-ticket-form` — public submission → triage queue
 - [ ] `06-ticket-tracker` — public read-only board
 - [ ] `07-auth` — env password, cookie session, proxy guard
