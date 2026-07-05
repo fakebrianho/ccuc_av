@@ -17,10 +17,25 @@ route is implemented). Ticket data layer live: `src/lib/db.js`,
 **User decision (2026-07-05):** hero copy is minimal — "CCUC AV / The audio &
 visual department of CCUC." No taglines or marketing hooks anywhere; keep all
 copy minimal.
-**Next pickup:** Slice `09-polish-integration` (05-08 verified against an
-in-memory Mongo: form round-trip, tracker board, full login/logout/guard flow,
-triage approve→tracker, PATCH edits, guarded 401s on unauth GET/PATCH/DELETE).
-Slice 08 closed the slice-04 seam: unscoped `GET /api/tickets` is now admin-only.
+**Next pickup:** Deploy verification only (blocked on user-owned credentials).
+All code slices 00-09 are done and committed. Full local verification is green:
+site walkthrough (no console errors/hydration warnings), form round-trip,
+tracker board, login/logout/guard flow, triage approve→tracker, PATCH edits,
+guarded 401s. Slice 08 closed the slice-04 seam (unscoped `GET /api/tickets`
+is admin-only).
+**Decisions recorded:**
+- React `<ViewTransition>` (experimental flag) NOT enabled — `template.js`
+  motion transitions already cover navigation; the experimental flag adds
+  deploy risk with no visible gain at this site size. Revisit if shared-element
+  morphs are wanted later.
+- Final critique P1s fixed (ghost CTA border, tracker type chip, column title
+  contrast, team card contact alignment, global muted-text contrast). Remaining
+  P2 notes (nav casing, column balance) accepted as-is — minimal style is
+  intentional. The floating "N" badge in shots is the Next.js dev overlay, not
+  product UI.
+**To finish (user):** create the MongoDB Atlas cluster + `MONGODB_URI`, set
+`ADMIN_PASSWORD`/`SESSION_SECRET`, push to Vercel, and run one live
+submit→approve→tracker round-trip. Then archive this spec with close-spec.
 **Note:** Live Atlas round-trip still unverified (no real `MONGODB_URI`) —
 verify during slice 09 deploy. Local verification harness:
 `specs/av-team-site/assets/memdb.mjs` (seeded in-memory Mongo on port 27099)
@@ -46,7 +61,8 @@ plus `login-check.mjs` / `shoot-tickets.mjs`.
 - [x] `06-ticket-tracker` — public read-only board
 - [x] `07-auth` — env password, cookie session, proxy guard
 - [x] `08-admin-dashboard` — triage, schedule, edit, delete
-- [ ] `09-polish-integration` — seamless transitions everywhere, a11y, deploy
+- [x] `09-polish-integration` — transitions, a11y, contrast polish (deploy
+      verification pending user credentials)
 
 > Next agent: update this section (status, pickup point, checklist) before ending
 > your pass.

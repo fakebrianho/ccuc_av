@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CCUC AV Website
 
-## Getting Started
+The website of the CCUC audio & visual department: team roster and contacts,
+scope of responsibilities, public ticket submission, a live ticket tracker,
+and a password-protected admin area for triage and scheduling.
 
-First, run the development server:
+Built with Next.js 16 (App Router, JavaScript), GSAP + Lenis + motion.dev for
+animation, and MongoDB Atlas for ticket storage. Deploys to Vercel.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill in the values below
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+| Variable | Purpose |
+| --- | --- |
+| `MONGODB_URI` | MongoDB Atlas connection string (tickets live in db `ccuc_av`, collection `tickets`) |
+| `ADMIN_PASSWORD` | The single admin login password |
+| `SESSION_SECRET` | Random secret used to sign the admin session cookie |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set the same three variables in the Vercel project settings for deploys. In
+Atlas, allow network access from Vercel (0.0.0.0/0 or Vercel's IP ranges).
 
-## Learn More
+## Architecture invariants
 
-To learn more about Next.js, take a look at the following resources:
+- **Ticket shape** has one owner: `src/lib/tickets/schema.js`. All layers
+  import constants/validators from there.
+- **DB connection** has one owner: `src/lib/db.js` (cached serverless-safe
+  client). Nothing else connects to Mongo.
+- **Auth/session** has one owner: `src/lib/auth.js`; `src/proxy.js` guards
+  `/admin`, `src/lib/admin-guard.js` guards API mutations.
+- **Smooth scroll** has one owner: `src/components/motion/SmoothScroll.jsx`
+  (single Lenis instance). Page transitions live in `src/app/template.js`.
+- **Site content** (team, responsibilities) is hardcoded in `src/data/` and
+  edited in code. Replace placeholder headshots in `public/team/`.
+- Never persist to the local filesystem — Vercel is serverless; all ticket
+  state lives in Atlas.
+- All animation respects `prefers-reduced-motion`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Ticket flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Public form (`/submit`) → ticket lands with status `new` (admin-only triage
+queue) → admin approves on `/admin` → ticket appears on the public tracker
+(`/tracker`). Full ticket listing and all mutations require the admin session.
 
-## Deploy on Vercel
+## Local verification without Atlas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`specs/av-team-site/assets/memdb.mjs` starts a seeded in-memory MongoDB on
+port 27099. Run the dev server with
+`MONGODB_URI="mongodb://127.0.0.1:27099/" ADMIN_PASSWORD=testpass SESSION_SECRET=devsecret npm run dev`,
+then use `login-check.mjs` and `admin-check.mjs` in the same folder.
