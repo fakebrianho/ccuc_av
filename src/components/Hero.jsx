@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "@/components/motion/SmoothScroll";
+import WeekStatus from "@/components/WeekStatus";
 import styles from "./Hero.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -73,6 +74,7 @@ export default function Hero() {
         <p className={styles.sub}>
           The audio &amp; visual department of CCUC.
         </p>
+        <WeekStatus />
         <div className={styles.ctas}>
           <Link href="/submit" className={styles.primary}>
             Submit a ticket

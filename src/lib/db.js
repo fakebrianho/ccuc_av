@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 
 const DB_NAME = "ccuc_av";
 const TICKETS_COLLECTION = "tickets";
+const SCHEDULE_COLLECTION = "schedule";
 
 // Cache the client promise on globalThis so dev hot-reload and serverless
 // function reuse don't spawn a new connection per invocation.
@@ -28,4 +29,9 @@ export async function getDb() {
 export async function getTicketsCollection() {
   const db = await getDb();
   return db.collection(TICKETS_COLLECTION);
+}
+
+export async function getScheduleCollection() {
+  const db = await getDb();
+  return db.collection(SCHEDULE_COLLECTION);
 }

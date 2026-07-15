@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SESSION_COOKIE } from "@/lib/auth";
 import AdminDashboard from "@/components/AdminDashboard";
+import ScheduleTracker from "@/components/ScheduleTracker";
 import styles from "./page.module.css";
 
 export const metadata = { title: "Admin" };
@@ -27,6 +28,7 @@ export default function AdminPage() {
           </button>
         </form>
       </div>
+      <ScheduleTracker />
       <AdminDashboard />
     </main>
   );

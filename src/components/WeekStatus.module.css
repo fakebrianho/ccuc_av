@@ -1,0 +1,66 @@
+.week {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+  min-width: 64px;
+}
+
+.day.isToday {
+  border-color: var(--accent);
+}
+
+.dayLabel {
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.dateLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.in-office {
+  background: var(--accent);
+}
+
+.dot.wfh {
+  background: #2563eb;
+}
+
+.dot.out-of-office {
+  background: var(--red);
+}
+
+.dot.afk {
+  background: #6b7280;
+}
+
+.dot.unknown {
+  background: var(--line);
+}
+
+.statusLabel {
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
