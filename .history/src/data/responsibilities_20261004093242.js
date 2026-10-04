@@ -11,9 +11,10 @@ export const responsibilities = {
   ],
   doesNot: [
     "Personal equipment repair or loans",
-    "AV Requests submitted with less than 48hrs notice",
+    "AV Requests submitted ",
     "Off-site event production not approved by leadership",
     "Building slide decks or graphic design content",
+    "IT support unrelated to AV (Wi-Fi, printers, office computers)",
     "Purchasing equipment without budget approval",
   ],
 };

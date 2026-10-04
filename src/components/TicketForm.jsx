@@ -13,6 +13,15 @@ const initialForm = {
   submitterName: "",
 };
 
+const DESCRIPTION_PLACEHOLDER = [
+  "Please include:",
+  "• What the event is",
+  "• Which congregation it's for",
+  "• Approximate number of people (if any)",
+  "• AV needs (mics, projection, livestream, etc.)",
+  "• Location / room",
+].join("\n");
+
 export default function TicketForm() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
@@ -86,6 +95,7 @@ export default function TicketForm() {
           className={styles.textarea}
           value={form.description}
           onChange={set("description")}
+          placeholder={DESCRIPTION_PLACEHOLDER}
           rows={6}
           maxLength={5000}
           aria-invalid={Boolean(errors.description)}

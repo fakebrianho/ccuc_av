@@ -108,3 +108,12 @@
   padding: var(--space-2) var(--space-6);
   color: var(--accent);
 }
+
+.textarea::placeholder {
+  color: var(--fg-muted);
+  opacity: 1;
+}
+
+.textarea:focus::placeholder {
+  color: transparent;
+}

@@ -14,6 +14,7 @@ export const responsibilities = {
     "AV Requests submitted with less than 48hrs notice",
     "Off-site event production not approved by leadership",
     "Building slide decks or graphic design content",
+    "IT support unrelated to AV (Wi-Fi, printers, office computers)",
     "Purchasing equipment without budget approval",
   ],
 };

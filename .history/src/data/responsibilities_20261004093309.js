@@ -3,7 +3,7 @@ export const responsibilities = {
   does: [
     "Sunday service audio, video, and livestream production",
     "Microphone, monitor, and instrument line setup for services and events",
-    "Slide and projection support during scheduled services",
+    "Slide and projection support during scheduled services/events",
     "Recording and publishing of sermons",
     "Maintenance of sanctuary AV equipment",
     "AV support for pre-scheduled church events (with a ticket)",
