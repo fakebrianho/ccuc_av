@@ -11,6 +11,8 @@ const initialForm = {
   type: "bug",
   priority: "medium",
   submitterName: "",
+  contactEmail: "",
+  contactPhone: "",
 };
 
 const DESCRIPTION_PLACEHOLDER = [
@@ -141,6 +143,34 @@ export default function TicketForm() {
           maxLength={100}
         />
       </Field>
+
+      <div className={styles.row}>
+        <Field label="Email" error={errors.contactEmail}>
+          <input
+            className={styles.input}
+            type="email"
+            autoComplete="email"
+            value={form.contactEmail}
+            onChange={set("contactEmail")}
+            maxLength={254}
+            aria-invalid={Boolean(errors.contactEmail)}
+            required
+          />
+        </Field>
+
+        <Field label="Phone number" error={errors.contactPhone}>
+          <input
+            className={styles.input}
+            type="tel"
+            autoComplete="tel"
+            value={form.contactPhone}
+            onChange={set("contactPhone")}
+            maxLength={30}
+            aria-invalid={Boolean(errors.contactPhone)}
+            required
+          />
+        </Field>
+      </div>
 
       <AnimatePresence>
         {errors.form && (

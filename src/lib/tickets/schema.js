@@ -6,6 +6,9 @@ export const TYPES = ["bug", "request"];
 export const PRIORITIES = ["low", "medium", "high", "urgent"];
 export const STATUSES = ["new", "triaged", "in-progress", "blocked", "done"];
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+()\d\s.-]+$/;
+
 export function validateNewTicket(input) {
   const errors = {};
   const src = input && typeof input === "object" ? input : {};
@@ -49,14 +52,52 @@ export function validateNewTicket(input) {
     }
   }
 
+  const contactEmail =
+    typeof src.contactEmail === "string" ? src.contactEmail.trim() : "";
+  if (!contactEmail) {
+    errors.contactEmail = "Email is required.";
+  } else if (contactEmail.length > 254 || !EMAIL_RE.test(contactEmail)) {
+    errors.contactEmail = "Enter a valid email address.";
+  }
+
+  const contactPhone =
+    typeof src.contactPhone === "string" ? src.contactPhone.trim() : "";
+  const phoneDigits = contactPhone.replace(/\D/g, "");
+  if (!contactPhone) {
+    errors.contactPhone = "Phone number is required.";
+  } else if (
+    contactPhone.length > 30 ||
+    !PHONE_RE.test(contactPhone) ||
+    phoneDigits.length < 7 ||
+    phoneDigits.length > 15
+  ) {
+    errors.contactPhone = "Enter a valid phone number.";
+  }
+
   const valid = Object.keys(errors).length === 0;
   return {
     valid,
     errors,
     value: valid
-      ? { title, description, type, priority, submitterName }
+      ? {
+          title,
+          description,
+          type,
+          priority,
+          submitterName,
+          contactEmail,
+          contactPhone,
+        }
       : null,
   };
+}
+
+// Strips submitter contact details. Anything served to non-admins must go
+// through this.
+export function toPublicTicket(ticket) {
+  if (!ticket) return null;
+  const { contactEmail, contactPhone, ...rest } = ticket;
+  return rest;
 }
 
 export function validateTicketPatch(input) {

@@ -75,6 +75,7 @@ export default function AdminDashboard() {
                     {cap(t.type)} · {cap(t.priority)}
                     {t.submitterName ? ` · from ${t.submitterName}` : ""}
                   </p>
+                  <ContactLine ticket={t} />
                 </div>
                 <div className={styles.queueActions}>
                   <button
@@ -118,7 +119,10 @@ export default function AdminDashboard() {
               <tbody>
                 {rest.map((t) => (
                   <tr key={t._id}>
-                    <td className={styles.titleCell}>{t.title}</td>
+                    <td className={styles.titleCell}>
+                      {t.title}
+                      <ContactLine ticket={t} />
+                    </td>
                     <td>
                       <select
                         value={t.status}
@@ -187,5 +191,20 @@ export default function AdminDashboard() {
         )}
       </section>
     </div>
+  );
+}
+
+function ContactLine({ ticket }) {
+  if (!ticket.contactEmail && !ticket.contactPhone) return null;
+  return (
+    <p className={styles.meta}>
+      {ticket.contactEmail && (
+        <a href={`mailto:${ticket.contactEmail}`}>{ticket.contactEmail}</a>
+      )}
+      {ticket.contactEmail && ticket.contactPhone && " · "}
+      {ticket.contactPhone && (
+        <a href={`tel:${ticket.contactPhone}`}>{ticket.contactPhone}</a>
+      )}
+    </p>
   );
 }

@@ -1,4 +1,4 @@
-import { STATUSES } from "@/lib/tickets/schema";
+import { STATUSES, toPublicTicket } from "@/lib/tickets/schema";
 import { listTickets } from "@/lib/tickets/queries";
 import TrackerBoard from "@/components/TrackerBoard";
 import styles from "./page.module.css";
@@ -12,9 +12,11 @@ export default async function TrackerPage() {
   let tickets = [];
   let unavailable = false;
   try {
-    tickets = await listTickets({
-      statuses: STATUSES.filter((s) => s !== "new"),
-    });
+    tickets = (
+      await listTickets({
+        statuses: STATUSES.filter((s) => s !== "new"),
+      })
+    ).map(toPublicTicket);
   } catch {
     unavailable = true;
   }

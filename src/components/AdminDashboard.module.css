@@ -135,3 +135,8 @@
   color: var(--fg);
   width: 140px;
 }
+
+.meta a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
